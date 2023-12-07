@@ -1,15 +1,21 @@
-﻿using System;
+﻿using StrikeNeckDB.DataControl;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DB
+namespace NewStrikeNeckDB
 {
-    internal class main
+    internal class Program
     {
         static void Main(string[] args)
         {
+            DBCreator tmp = new DBCreator();
+            tmp.MinuteResultSaveDBCreator();
+            tmp.HourResultSaveDBCreator();
+            tmp.DayResultSaveDBCreator();
+
         }
     }
 }

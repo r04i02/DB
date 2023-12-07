@@ -3,10 +3,32 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
 
-namespace DB.DataControl
+namespace StrikeNeckDB.DataControl
 {
     internal class ResultReturner
     {
+        private Tuple<int, int> Result;
+        public Tuple<int, int> MinuteResultReturner()
+        {
+
+
+            return Result;
+        }
+
+        public Tuple<int, int> HourResultReturner()
+        {
+
+
+            return Result;
+        }
+
+        public Tuple<int, int> DayResultReturner()
+        {
+
+
+            return Result;
+        }
     }
 }
