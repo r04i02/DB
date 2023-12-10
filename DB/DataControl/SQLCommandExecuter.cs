@@ -8,34 +8,51 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Configuration;
 
-namespace NewDB.DataControl
+namespace DB.DataControl
 {
-    internal class SQLCommandExecuter
+    public class SQLCommandExecuter
     {
+        private int ReturnVal = 0;
         public void ExecuteNonQuery(string command)
         {
-            string tmp = "Data Source=test.sqlite";
-            SqlConnection myConn = new SqlConnection(tmp);
-            SqlCommand myCommand = new SqlCommand(command, myConn);
+            string connectionString = "Server=localhost;Database=master;Trusted_Connection=True;";
+            SqlConnection connection = new SqlConnection(connectionString);
+
+            SqlCommand myCommand = new SqlCommand(command, connection);
             try
             {
-                myConn.Open();
+                connection.Open();
                 myCommand.ExecuteNonQuery();
             }
             finally
             {
-                if (myConn.State == ConnectionState.Open)
+                if (connection.State == ConnectionState.Open)
                 {
-                    myConn.Close();
+                    connection.Close();
                 }
             }
         }
 
-        public int Return()
+        public int SelectReturn(string command)
         {
+            string connectionString = "Server=localhost;Database=master;Trusted_Connection=True;";
+            SqlConnection connection = new SqlConnection(connectionString);
 
 
-            return 0;
+            SqlCommand myCommand = new SqlCommand(command, connection);
+            try
+            {
+                connection.Open();
+                ReturnVal = myCommand.ExecuteNonQuery();
+            }
+            finally
+            {
+                if (connection.State == ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
+            return ReturnVal;
         }
     }
 }

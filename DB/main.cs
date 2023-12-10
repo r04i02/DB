@@ -11,11 +11,19 @@ namespace NewStrikeNeckDB
     {
         static void Main(string[] args)
         {
-            DBCreator tmp = new DBCreator();
-            tmp.MinuteResultSaveDBCreator();
-            tmp.HourResultSaveDBCreator();
-            tmp.DayResultSaveDBCreator();
+            DBCreator tmp1 = new DBCreator();
+            ResultSaveAlgorithm tmp2 = new ResultSaveAlgorithm();
 
+            tmp1.MinuteResultSaveDBCreator();
+            tmp1.HourResultSaveDBCreator();
+            tmp1.DayResultSaveDBCreator();
+
+            tmp2.ResultSave();
+
+            while (true)
+            {
+                Console.WriteLine(1);
+            }
         }
     }
 }

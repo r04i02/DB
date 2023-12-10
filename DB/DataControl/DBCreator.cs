@@ -3,7 +3,7 @@ using Microsoft.Data.Sqlite;
 using System.Configuration;
 using static System.Net.Mime.MediaTypeNames;
 using System.Text;
-using NewDB.DataControl;
+using DB.DataControl;
 
 namespace StrikeNeckDB.DataControl
 {
@@ -14,25 +14,29 @@ namespace StrikeNeckDB.DataControl
         {
             StringBuilder query = new StringBuilder();
             query.Clear();
-            query.Append("CREATE TABLE IF NOT EXISTS HourlyData(");
-            query.Append("DATETIME TEXT NOT NULL");
-            query.Append(",RESULT INTEGER NOT NULL");
-            query.Append(",primary key(DATETIME)");
+            query.Append("IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'HourlyData') ");
+            query.Append("CREATE TABLE HourlyData(");
+            query.Append("DATETIMEhh INTEGER NOT NULL");
+            query.Append(",ForwardLeanMinute INTEGER NOT NULL");
+            query.Append(",primary key(DATETIMEhh)");
             query.Append(");");
 
             tmp.ExecuteNonQuery(query.ToString());
         }
 
+
         public void HourResultSaveDBCreator()
         {
             StringBuilder query = new StringBuilder();
             query.Clear();
-            query.Append("CREATE TABLE IF NOT EXISTS DailyData(");
-            query.Append("DATETIME TEXT NOT NULL");
-            query.Append(",UptimeMinute INTEGER NOT NULL");
+            query.Append("IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'DailyData') ");
+            query.Append("CREATE TABLE DailyData(");
+            query.Append("DATETIMEhh INTEGER NOT NULL");
+            query.Append(",UptimeHour INTEGER NOT NULL");
             query.Append(",ForwardLeanMinute INTEGER NOT NULL");
-            query.Append(",primary key(DATETIME)");
+            query.Append(",primary key(DATETIMEhh)");
             query.Append(");");
+
 
             tmp.ExecuteNonQuery(query.ToString());
         }
@@ -41,11 +45,12 @@ namespace StrikeNeckDB.DataControl
         {
             StringBuilder query = new StringBuilder();
             query.Clear();
-            query.Append("CREATE TABLE IF NOT EXISTS YearlyData(");
-            query.Append("DATETIME TEXT NOT NULL");
+            query.Append("IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'YearlyData') ");
+            query.Append("CREATE TABLE YearlyData(");
+            query.Append("DATETIMEdd INTEGER NOT NULL");
             query.Append(",UptimeHour INTEGER NOT NULL");
-            query.Append(",ForwardLeanHour NOT NULL");
-            query.Append(",primary key(DATETIME)");
+            query.Append(",ForwardLeanHour INTEGER NOT NULL");
+            query.Append(",primary key(DATETIMEdd)");
             query.Append(");");
         }
     }
