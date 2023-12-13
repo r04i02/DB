@@ -69,7 +69,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataControl\DBControler.cs" />
+    <Compile Include="DataControl\DBController.cs" />
     <Compile Include="DataControl\DBCreator.cs" />
     <Compile Include="DataControl\ResultReturner.cs" />
     <Compile Include="DataControl\ResultSaveAlgorithm.cs" />

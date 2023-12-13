@@ -12,34 +12,33 @@ namespace StrikeNeckDB.DataControl
     {
         private int FunctionChooser = 0;
         private int LastTimehh = 0;
-        private DateTime LastTime = DateTime.Now;
-        private DBControler DBcontrol = new DBControler();
+        private int LastTimedd = 0;
+        private DateTime now = DateTime.Now;
+        private DBController DBcontrol = new DBController();
         private SQLCommandExecuter tmp = new SQLCommandExecuter();
         public void ResultSave()
         {
-            StringBuilder query = new StringBuilder();
-            query.Clear();
-            query.Append("SELECT TOP(1) ");
-            query.Append("DATETIMEhh ");
-            query.Append("FROM HourlyData");
-            query.Append(";");
-
+            StringBuilder query = tmp.GetSelectReturnQuery("DATETIMEhh", "HourlyData");
             string command = query.ToString();
             LastTimehh = tmp.SelectReturn(command);
 
+            query = tmp.GetSelectReturnQuery("DATETIMEdd", "YearlyData");
+            command = query.ToString();
+            LastTimedd = tmp.SelectReturn(command);
+
             DateTime now = DateTime.Now;
-            //if ()
-            //{
-            //    FunctionChooser = 1;
-            //}
-            //else if ()
-            //{
-            //    FunctionChooser = 2;
-            //}
-            //else
-            //{
-            //    FunctionChooser = 3;
-            //}
+            if (LastTimehh == 0)
+            {
+                FunctionChooser = 1;
+            }
+            else if (LastTimehh < now.Hour||(LastTimehh==23&&now.Hour==0))
+            {
+                FunctionChooser = 2;
+            }
+            else if (LastTimedd < now.Day && LastTimedd != 0 || (LastTimedd == 28 && now.Day == 1) || (LastTimedd == 29 && now.Day == 1) || (LastTimedd == 30 && now.Day == 1) || (LastTimedd == 31 && now.Day == 1))
+            {
+                FunctionChooser = 3;
+            }
 
             if (FunctionChooser == 1)
             {
@@ -55,6 +54,7 @@ namespace StrikeNeckDB.DataControl
                 DBcontrol.DayResultSave();
                 DBcontrol.MinuteResultReset();
             }
+            Console.WriteLine(LastTimehh);
         }
     }
 }

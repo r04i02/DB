@@ -7,8 +7,9 @@ using System.Configuration;
 
 namespace StrikeNeckDB.DataControl
 {
-    internal class DBControler
+    internal class DBController
     {
+        private DateTime now = new DateTime();
         public void MinuteResultSave()
         {
 

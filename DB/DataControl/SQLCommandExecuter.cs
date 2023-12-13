@@ -54,5 +54,17 @@ namespace DB.DataControl
             }
             return ReturnVal;
         }
+
+        public StringBuilder GetSelectReturnQuery(string Column, string DB)
+        {
+            StringBuilder Query = new StringBuilder();
+            Query.Clear();
+            Query.Append("SELECT TOP(1) ");
+            Query.Append(Column);
+            Query.Append(" ");
+            Query.Append(DB);
+            Query.Append(";");
+            return Query;
+        }
     }
 }

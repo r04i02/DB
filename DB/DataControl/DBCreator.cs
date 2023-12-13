@@ -52,6 +52,8 @@ namespace StrikeNeckDB.DataControl
             query.Append(",ForwardLeanHour INTEGER NOT NULL");
             query.Append(",primary key(DATETIMEdd)");
             query.Append(");");
+
+            tmp.ExecuteNonQuery(query.ToString());
         }
     }
 }

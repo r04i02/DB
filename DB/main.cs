@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace NewStrikeNeckDB
@@ -20,9 +21,12 @@ namespace NewStrikeNeckDB
 
             tmp2.ResultSave();
 
+            
             while (true)
             {
-                Console.WriteLine(1);
+                DateTime date1 = DateTime.Now;
+                Console.WriteLine(date1.Second);
+                Thread.Sleep(1000);
             }
         }
     }
