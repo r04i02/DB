@@ -19,7 +19,7 @@ namespace NewStrikeNeckDB
             tmp1.HourResultSaveDBCreator();
             tmp1.DayResultSaveDBCreator();
 
-            tmp2.ResultSave();
+            tmp2.ResultSave(true);
 
             
             while (true)

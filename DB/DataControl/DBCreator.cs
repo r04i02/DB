@@ -9,6 +9,7 @@ namespace StrikeNeckDB.DataControl
 {
     public class DBCreator
     {
+        private DateTime now = DateTime.Now;
         SQLCommandExecuter tmp = new SQLCommandExecuter();
         public void MinuteResultSaveDBCreator()
         {
@@ -22,6 +23,8 @@ namespace StrikeNeckDB.DataControl
             query.Append(");");
 
             tmp.ExecuteNonQuery(query.ToString());
+
+            query.Clear();
         }
 
 
@@ -31,12 +34,12 @@ namespace StrikeNeckDB.DataControl
             query.Clear();
             query.Append("IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'DailyData') ");
             query.Append("CREATE TABLE DailyData(");
-            query.Append("DATETIMEhh INTEGER NOT NULL");
+            query.Append("DATETIMEdd INTEGER NOT NULL");
+            query.Append(",DATETIMEhh INTEGER NOT NULL");
             query.Append(",UptimeHour INTEGER NOT NULL");
             query.Append(",ForwardLeanMinute INTEGER NOT NULL");
             query.Append(",primary key(DATETIMEhh)");
             query.Append(");");
-
 
             tmp.ExecuteNonQuery(query.ToString());
         }

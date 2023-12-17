@@ -11,23 +11,42 @@ namespace StrikeNeckDB.DataControl
     internal class ResultSaveAlgorithm
     {
         private int FunctionChooser = 0;
-        private int LastTimehh = 0;
-        private int LastTimedd = 0;
+        private int? LastTimehh;
+        private int? LastTimedd;
         private DateTime now = DateTime.Now;
         private DBController DBcontrol = new DBController();
         private SQLCommandExecuter tmp = new SQLCommandExecuter();
-        public void ResultSave()
+        public void ResultSave(bool result)
         {
-            StringBuilder query = tmp.GetSelectReturnQuery("DATETIMEhh", "HourlyData");
-            string command = query.ToString();
-            LastTimehh = tmp.SelectReturn(command);
+            StringBuilder query = new StringBuilder();
+            query.Clear();
+            query.Append("SELECT TOP 1 DATETIMEhh FROM HourlyData ORDER BY DATETIMEhh ASC;");
 
-            query = tmp.GetSelectReturnQuery("DATETIMEdd", "YearlyData");
-            command = query.ToString();
-            LastTimedd = tmp.SelectReturn(command);
+            string command = query.ToString();
+            int? LastTimehh = tmp.SelectReturn(command);
+
+            if (LastTimehh == null)
+            {
+                LastTimehh = -1;
+            }
+
+            query.Clear();
+            query.Append("SELECT TOP 1 DATETIMEdd FROM YearlyData ORDER BY DATETIMEdd ASC;");
+
+            string command1 = query.ToString();
+            int? LastTimedd = tmp.SelectReturn(command1);
+
+            if (LastTimedd == null)
+            {
+                LastTimedd = -1;
+            }
+
+
+
+
 
             DateTime now = DateTime.Now;
-            if (LastTimehh == 0)
+            if (LastTimehh == -1)
             {
                 FunctionChooser = 1;
             }
@@ -42,7 +61,7 @@ namespace StrikeNeckDB.DataControl
 
             if (FunctionChooser == 1)
             {
-                DBcontrol.MinuteResultSave();
+                DBcontrol.MinuteResultSave(result);
             }
             else if (FunctionChooser == 2)
             {
@@ -54,7 +73,6 @@ namespace StrikeNeckDB.DataControl
                 DBcontrol.DayResultSave();
                 DBcontrol.MinuteResultReset();
             }
-            Console.WriteLine(LastTimehh);
         }
     }
 }
