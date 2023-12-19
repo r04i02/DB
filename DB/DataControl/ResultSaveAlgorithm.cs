@@ -15,7 +15,8 @@ namespace StrikeNeckDB.DataControl
         private int? LastTimedd;
         private DateTime now = DateTime.Now;
         private DBController DBcontrol = new DBController();
-        private SQLCommandExecuter tmp = new SQLCommandExecuter();
+        private SQLCommandExecuter SQLcommandEcecuteObject = new SQLCommandExecuter();
+
         public void ResultSave(bool result)
         {
             StringBuilder query = new StringBuilder();
@@ -23,27 +24,27 @@ namespace StrikeNeckDB.DataControl
             query.Append("SELECT TOP 1 DATETIMEhh FROM HourlyData ORDER BY DATETIMEhh ASC;");
 
             string command = query.ToString();
-            int? LastTimehh = tmp.SelectReturn(command);
+            int? LastTimehh = SQLcommandEcecuteObject.ReturnResult(command);
 
             if (LastTimehh == null)
             {
                 LastTimehh = -1;
+                Console.WriteLine("null");
             }
 
             query.Clear();
             query.Append("SELECT TOP 1 DATETIMEdd FROM YearlyData ORDER BY DATETIMEdd ASC;");
 
             string command1 = query.ToString();
-            int? LastTimedd = tmp.SelectReturn(command1);
+            int? LastTimedd = SQLcommandEcecuteObject.ReturnResult(command1);
+
 
             if (LastTimedd == null)
             {
                 LastTimedd = -1;
             }
 
-
-
-
+            Console.WriteLine(LastTimehh);
 
             DateTime now = DateTime.Now;
             if (LastTimehh == -1)

@@ -13,19 +13,21 @@ namespace NewStrikeNeckDB
         static void Main(string[] args)
         {
             DBCreator tmp1 = new DBCreator();
-            ResultSaveAlgorithm tmp2 = new ResultSaveAlgorithm();
+            DBController tmp2 = new DBController();
+            ResultSaveAlgorithm tmp3 = new ResultSaveAlgorithm();
 
-            tmp1.MinuteResultSaveDBCreator();
-            tmp1.HourResultSaveDBCreator();
-            tmp1.DayResultSaveDBCreator();
+            tmp1.CreateMinuteResultDB();
+            tmp1.CreateHourResultDB();
+            tmp1.CreateDayResultDB();
 
-            tmp2.ResultSave(true);
+            tmp3.ResultSave(true);
 
+            tmp2.HourResultSave();
             
             while (true)
             {
                 DateTime date1 = DateTime.Now;
-                Console.WriteLine(date1.Second);
+                //Console.WriteLine(date1.Second);
                 Thread.Sleep(1000);
             }
         }

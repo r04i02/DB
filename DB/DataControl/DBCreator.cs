@@ -10,25 +10,26 @@ namespace StrikeNeckDB.DataControl
     public class DBCreator
     {
         private DateTime now = DateTime.Now;
-        SQLCommandExecuter tmp = new SQLCommandExecuter();
-        public void MinuteResultSaveDBCreator()
+        SQLCommandExecuter SQLcommandEcecuteObject = new SQLCommandExecuter();
+        public void CreateMinuteResultDB()
         {
             StringBuilder query = new StringBuilder();
             query.Clear();
             query.Append("IF NOT EXISTS (SELECT * FROM sys.tables WHERE name = 'HourlyData') ");
             query.Append("CREATE TABLE HourlyData(");
-            query.Append("DATETIMEhh INTEGER NOT NULL");
+            query.Append("UptimeMinute INTEGER NOT NULL");
+            query.Append(",DATETIMEhh INTEGER NOT NULL");
             query.Append(",ForwardLeanMinute INTEGER NOT NULL");
             query.Append(",primary key(DATETIMEhh)");
             query.Append(");");
 
-            tmp.ExecuteNonQuery(query.ToString());
+            SQLcommandEcecuteObject.ExecuteNonQuery(query.ToString());
 
             query.Clear();
         }
 
 
-        public void HourResultSaveDBCreator()
+        public void CreateHourResultDB()
         {
             StringBuilder query = new StringBuilder();
             query.Clear();
@@ -41,10 +42,10 @@ namespace StrikeNeckDB.DataControl
             query.Append(",primary key(DATETIMEhh)");
             query.Append(");");
 
-            tmp.ExecuteNonQuery(query.ToString());
+            SQLcommandEcecuteObject.ExecuteNonQuery(query.ToString());
         }
 
-        public void DayResultSaveDBCreator()
+        public void CreateDayResultDB()
         {
             StringBuilder query = new StringBuilder();
             query.Clear();
@@ -56,7 +57,7 @@ namespace StrikeNeckDB.DataControl
             query.Append(",primary key(DATETIMEdd)");
             query.Append(");");
 
-            tmp.ExecuteNonQuery(query.ToString());
+            SQLcommandEcecuteObject.ExecuteNonQuery(query.ToString());
         }
     }
 }

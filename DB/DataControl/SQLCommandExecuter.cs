@@ -33,7 +33,7 @@ namespace DB.DataControl
             }
         }
 
-        public int SelectReturn(string command)
+        public int ReturnResult(string command)
         {
             string connectionString = "Server=localhost;Database=master;Trusted_Connection=True;";
             SqlConnection connection = new SqlConnection(connectionString);
